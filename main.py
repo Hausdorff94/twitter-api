@@ -78,6 +78,24 @@ class Tweet(BaseModel):
     tags = ['Users']
 )
 def signup():
+    """
+
+    This path operation register a new user in the app.
+
+    Parameters:
+        - Request body parameters:
+            - user: User, UserLogin
+
+    Returns a json with the user data.
+        - user_id: UUID
+        - email: EmailStr
+        - first_name: str
+        - last_name: str
+        - birth_date: str
+    """
+    
+
+
     pass
 
 ### Login a user
