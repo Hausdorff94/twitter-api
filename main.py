@@ -126,13 +126,28 @@ def login():
 ### Show all users
 @app.get(
     path="/users",
-    response_model=List[User],
-    status_code=status.HTTP_201_CREATED,
+    #response_model=List[User],
+    status_code=status.HTTP_200_OK,
     summary="Show all users",
     tags = ['Users']
 )
-def users():
-    pass
+def show_all_users():
+    """
+    This path operation show all users in the app.
+
+    - Parameters:
+
+    - Returns:
+        - json list with all users:
+            - user_id: UUID
+            - email: EmailStr
+            - first_name: str
+            - last_name: str
+            - birth_date: str
+    """
+    with open('users.json', 'r', encoding='utf-8') as f:
+        results = json.loads(f.read())
+        return results
 
 ### Show a user
 @app.get(
