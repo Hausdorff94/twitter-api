@@ -3,7 +3,7 @@
 from uuid import UUID
 from datetime import date
 from datetime import datetime
-from typing import Optional
+from typing import Optional, List
 
 # pydantic
 
@@ -13,6 +13,7 @@ from pydantic import Field
 
 # FastAPI
 from fastapi import FastAPI
+from fastapi import status
 
 app = FastAPI()
 
@@ -49,7 +50,6 @@ class User(UserBase):
     )
     birth_date: Optional[date] = Field(default=None)
 
-
 class Tweet(BaseModel):
     tweet_id: UUID = Field(
         ...,
@@ -65,9 +65,75 @@ class Tweet(BaseModel):
     update_at: Optional[datetime] = Field(default=None)
     by: User = Field(...)
 
+# Path operations
 
 @app.get(
     path="/"
     )
 def home():
     return {"message": "Hello World"}
+
+## Users
+
+@app.post(
+    path="/signup",
+    response_model=User,
+    status_code=status.HTTP_201_CREATED,
+    summary="Signup a new user",
+    tags = ['Users']
+)
+def signup():
+    pass
+
+@app.post(
+    path="/login",
+    response_model=User,
+    status_code=status.HTTP_200_OK,
+    summary="Login a user",
+    tags = ['Users']
+)
+def login():
+    pass
+
+@app.get(
+    path="/users",
+    response_model=List[User],
+    status_code=status.HTTP_201_CREATED,
+    summary="Show all users",
+    tags = ['Users']
+)
+def users():
+    pass
+
+@app.get(
+    path="/users/{user_id}",
+    response_model=User,
+    status_code=status.HTTP_201_CREATED,
+    summary="Show a user",
+    tags = ['Users']
+)
+def show_a_user():
+    pass
+
+@app.delete(
+    path="/users/{user_id}/delete",
+    response_model=User,
+    status_code=status.HTTP_201_CREATED,
+    summary="Delete a user",
+    tags = ['Users']
+)
+def delete_a_user():
+    pass
+
+@app.put(
+    path="/users/{user_id}/update",
+    response_model=User,
+    status_code=status.HTTP_201_CREATED,
+    summary="Update a user",
+    tags = ['Users']
+)
+def update_a_user():
+    pass
+
+
+
