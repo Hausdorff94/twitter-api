@@ -138,15 +138,14 @@ def show_all_users():
 
     This path operation show all users in the app.
 
-    - Parameters:
+    - Parameters: None
 
-    - Returns:
-        - json list with all users:
-            - user_id: UUID
-            - email: EmailStr
-            - first_name: str
-            - last_name: str
-            - birth_date: str
+    - Returns a json list with all users:
+        - user_id: UUID
+        - email: EmailStr
+        - first_name: str
+        - last_name: str
+        - birth_date: str
     """
     with open('users.json', 'r', encoding='utf-8') as f:
         results = json.loads(f.read())
@@ -190,13 +189,30 @@ def update_a_user():
 ### Show all tweets
 @app.get(
     path="/",
-    response_model=List[Tweet],
+    #response_model=List[Tweet],
     status_code=status.HTTP_200_OK,
     summary="Signup all tweets",
     tags = ['Tweets']
     )
 def home():
-    return {"message": "Hello World"}
+    """
+    Show all tweets
+
+    This path operation show all tweets in the app.
+
+    - Parameters: None
+
+    - Returns a json list with all tweets:
+        - tweet_id: UUID
+        - content: str
+        - create_at: datetime
+        - updated_at: Optional[datetime]
+        - by: User
+    """
+    with open('tweets.json', 'r', encoding='utf-8') as f:
+        results = json.loads(f.read())
+        return results
+
 
 ### Post a tweet
 @app.post(
